@@ -31,7 +31,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   app.get('/filteredimage', async ( req, res ) => {
     const image_url = req.query.image_url
     if(!image_url) {
-      res.status(401).send({ message: 'Please supply a valid URL with query key image_url'})
+      res.status(400).send({ message: 'Please supply a valid URL with query key image_url'})
     } else {
       try {
         await filterImageFromURL(image_url).
@@ -41,7 +41,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
             });
           })
       } catch(error) {
-        res.status(500).send({ message: error })
+        res.status(422).send({ message: error })
       }
     }
   })
